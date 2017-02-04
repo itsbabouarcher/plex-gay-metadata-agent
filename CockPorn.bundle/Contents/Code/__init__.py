@@ -21,15 +21,23 @@ class CockPornAgent(Agent.Movies):
 		self.Log('-----------------------------------------------------------------------')
 		self.Log(PLUGIN_LOG_TITLE + ' - SEARCH CALLED v.%s', version)
 		self.Log(PLUGIN_LOG_TITLE + ' - SEARCH - media.filename - %s', media.filename.split('%2F')[-1])
-		filename=media.filename.split('%2F')[-1].replace('%20', ' ').replace('%2Emp4', '')
+		#filename=media.filename.split('%2F')[-1].replace('%20', ' ').replace('%2Emp4', '')
 		self.Log(PLUGIN_LOG_TITLE + ' - SEARCH - results - %s', results)
 		self.Log(PLUGIN_LOG_TITLE + ' - SEARCH - media.title - %s', media.title)
-		results.Append(MetadataSearchResult(id=media.id, name=filename, score = 86, lang = lang))
+		results.Append(MetadataSearchResult(id=media.id, name=media.name, score = 86, lang = lang))
 		self.Log(PLUGIN_LOG_TITLE + ' - SEARCH - %s', results)
 
 
 	def update(self, metadata, media, lang):
 		self.Log(PLUGIN_LOG_TITLE + ' - UPDATE CALLED')
+
+		#filename = media.items[0].parts[0].file
+    
+		# Fill in the little we can get from a file.
+    	#try: title = os.path.splitext(os.path.basename(filename))[0]
+    	#except: title = media.title
+      
+    	#metadata.title = title
 
 		# Clear out the title to ensure stale data doesn't clobber other agents' contributions.
 		# metadata.title = None
