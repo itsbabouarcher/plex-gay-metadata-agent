@@ -368,3 +368,5 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+Thumbs.db

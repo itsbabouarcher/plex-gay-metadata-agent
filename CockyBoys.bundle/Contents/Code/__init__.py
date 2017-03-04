@@ -88,3 +88,14 @@ class CockyBoys(Agent.Movies):
 			metadata.content_rating = 'X'
 			metadata.title = video_title
 			metadata.studio = "CockyBoys"
+
+            # Try to get description text
+			try:
+				raw_about_text=html.xpath('//*[@class="movieDesc"]//text()')[0]
+				raw_about_text=raw_about_text.replace("<h2 class=\"gothamy\">Description</h2>", "")
+				self.Log('UPDATE - About Text - RAW %s', raw_about_text)
+				about_text=' '.join(str(x.text_content().strip()) for x in raw_about_text)
+				metadata.summary=about_text
+			except Exception as e: 
+				self.Log('UPDATE - Error getting description text: %s' % e)
+				pass
